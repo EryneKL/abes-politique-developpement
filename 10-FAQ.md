@@ -308,3 +308,22 @@ Parfois une requête peut être très lente.
 
 Dans sql developer, après s'être connecté à une instance de base de données, taper la requête, faire ctrl+f12 (ou cliquer sur la cinquième icone (à côté de "commit")).
 Ensuite dans l'onglet "détail", nous avons les plans d'éxecutions, les indexes à créer, les reformulations de requêtes éventuelles...il suffit de suivre les indications.
+
+# Docker : ajout de volume externe
+
+## Problème
+
+Suite à une Maj de Sonar, le token est perdu -> l'image docker de Sonar ne persiste pas le volume.
+
+## Solution
+
+Deux solution :
+ - soit on a accès au dockerfile : on ajoute une ligne 
+```
+VOLUME ./repertoireOuFichierLocal:/repertoireOuSeTrouveLeTokenDansDocker
+```
+ - soit on a accès qu'à l'image : on crée le conteneur avec l'option v
+ ```
+docker run -v ./repertoireOuFichierLocal:/repertoireOuSeTrouveLeTokenDansDocker NameImageSonar
+```
+ 
